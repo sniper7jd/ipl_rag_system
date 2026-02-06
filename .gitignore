@@ -1,0 +1,18 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtualenv
+venv/
+.venv/
+
+# Byte-compiled / SQLite
+*.sqlite3
+
+# Chroma DB folder
+chroma_db/
