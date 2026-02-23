@@ -1,22 +1,69 @@
-# 🏏 IPL Expert RAG System (2026)
+# IPL Expert RAG System
 
-A modular Retrieval-Augmented Generation (RAG) system built with **LangChain v1.0** and **ChromaDB**. This system specifically tracks the 2026 IPL season, handling complex queries regarding team rebrands and major player transfers (e.g., Sanju Samson to CSK).
+A config-driven Retrieval-Augmented Generation (RAG) pipeline built with **LangChain** and **ChromaDB**. Answer questions about IPL teams using Wikipedia-sourced data.
 
-## 🚀 Features
-- **Modular Architecture**: Separate components for Data Loading, Chunking, Vector Storage, and the LLM Engine.
-- **Contextual Reasoning**: Handles historical team names (e.g., "Delhi Daredevils") by correcting users based on current 2026 data.
-- **Persistent Storage**: Uses a local ChromaDB instance to avoid re-embedding data on every run.
+## Features
 
-## 📁 Project Structure
-- `main.py`: Orchestrates the entire pipeline.
-- `loader.py`: Fetches real-time data from Wikipedia.
-- `chunking.py`: Implements recursive character splitting.
-- `database.py`: Manages embeddings and the persistent vector store.
-- `engine.py`: Defines the LCEL chain and expert system prompt.
+- **Config-driven pipeline**: Change chunking, embeddings, vector store, retrieval, and LLM via `config.yaml`
+- **Pluggable strategies**: Recursive, semantic, or parent-child chunking; semantic, BM25, or hybrid retrieval
+- **Persistent storage**: ChromaDB with optional FAISS and Pinecone support
+- **Multiple LLM backends**: OpenAI, Gemini, Claude, Groq
 
-## 🛠️ Setup Instructions
+## Project structure
 
-1. **Clone the repository**:
+```
+ipl_rag_system/
+├── main.py              # Central orchestrator
+├── config.yaml          # Pipeline configuration
+├── src/
+│   ├── chunking/        # recursive, semantic, parent_child, paragraph
+│   ├── embeddings/      # openai, huggingface
+│   ├── vector_stores/   # chroma, faiss, pinecone
+│   ├── retrieval/       # semantic, bm25, hybrid
+│   ├── llms/            # openai, gemini, claude, groq
+│   └── loaders/         # wikipedia
+└── utils/               # logger, helpers
+```
+
+## Configuration
+
+Edit `config.yaml` to switch strategies:
+
+```yaml
+pipeline:
+  chunking: "recursive"       # recursive | semantic | parent_child | paragraph
+  embeddings: "huggingface"   # openai | huggingface
+  vector_store: "chroma"      # chroma | faiss | pinecone
+  retrieval: "semantic"       # semantic | bm25 | hybrid
+  llm: "openai"               # openai | gemini | groq | claude
+
+params:
+  chunk_size: 1000
+  chunk_overlap: 100
+  top_k: 5
+```
+
+## Setup
+
+1. **Clone and enter the repo**:
    ```bash
-   git clone [https://github.com/sniper7jd/ipl-rag-system.git](https://github.com/sniper7jd/ipl-rag-system.git)
+   git clone https://github.com/sniper7jd/ipl-rag-system.git
    cd ipl-rag-system
+   ```
+
+2. **Create a virtual environment and install dependencies**:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # Windows: venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+3. **Add your API keys** in `.env`:
+   ```
+   OPENAI_API_KEY=your_key_here
+   ```
+
+4. **Run**:
+   ```bash
+   python main.py
+   ```
