@@ -16,6 +16,7 @@ from src.embeddings import get_embeddings
 from src.vector_stores import get_vector_store
 from src.retrieval import get_retriever
 from src.llms import get_llm_chain
+from src.agents import create_rag_agent, invoke_agent
 
 load_dotenv()
 
@@ -61,15 +62,21 @@ def main():
         vectorstore=vectorstore,
         documents=chunks if pipeline["retrieval"] in ("bm25", "hybrid") else None,
         top_k=params.get("top_k", 5),
+        use_reranker=params.get("use_reranker", True),
     )
 
-    # 6. LLM Chain
-    print(f"Step 5: Initializing LLM ({pipeline['llm']})...")
-    rag_chain = get_llm_chain(pipeline["llm"], retriever=retriever)
-
-    # Run query
+    use_agentic = params.get("use_agentic", True)
     query = input("Ask a question about IPL teams: ")
-    response = rag_chain.invoke(query)
+
+    if use_agentic:
+        print("Step 5: Agentic mode (conditional retrieval)...")
+        agent = create_rag_agent(retriever, llm_provider=pipeline["llm"])
+        response, _ = invoke_agent(agent, query)
+    else:
+        print(f"Step 5: Initializing LLM ({pipeline['llm']})...")
+        rag_chain = get_llm_chain(pipeline["llm"], retriever=retriever)
+        response = rag_chain.invoke(query)
+
     print(f"\nAI Response:\n{response}")
 
 

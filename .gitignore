@@ -16,3 +16,6 @@ venv/
 
 # Chroma DB folder
 chroma_db/
+
+# Uploaded documents
+data/

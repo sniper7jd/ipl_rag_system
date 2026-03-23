@@ -1,3 +1,4 @@
+import os
 from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
@@ -10,9 +11,17 @@ Question: {question}
 Expert Answer:"""
 
 
-def get_chain(retriever, model="llama3-70b-8192", temperature=0, **kwargs):
+def get_chat_model(model=None, temperature=0, **kwargs):
+    if model is None:
+        model = os.getenv("GROQ_MODEL", "llama3-70b-8192")
+    return ChatGroq(model=model, temperature=temperature, **kwargs)
+
+
+def get_chain(retriever, model=None, temperature=0, **kwargs):
+    if model is None:
+        model = os.getenv("GROQ_MODEL", "llama3-70b-8192")
     prompt = ChatPromptTemplate.from_template(TEMPLATE)
-    llm = ChatGroq(model=model, temperature=temperature)
+    llm = get_chat_model(model=model, temperature=temperature, **kwargs)
     chain = (
         {"context": retriever, "question": RunnablePassthrough()}
         | prompt

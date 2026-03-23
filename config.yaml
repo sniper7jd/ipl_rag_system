@@ -1,12 +1,12 @@
-# config.yaml - Control Panel: Change pipeline behavior here
 pipeline:
-  chunking: "recursive"       # Options: recursive, semantic, parent_child, paragraph
-  embeddings: "huggingface"   # Options: openai, huggingface
-  vector_store: "chroma"      # Options: chroma, faiss, pinecone
-  retrieval: "semantic"       # Options: semantic, bm25, hybrid
-  llm: "openai"               # Options: openai, gemini, groq, claude
-
+  chunking: semantic
+  embeddings: huggingface
+  vector_store: faiss
+  retrieval: semantic
+  llm: gemini
 params:
   chunk_size: 1000
   chunk_overlap: 100
   top_k: 5
+  use_reranker: true
+  use_agentic: true

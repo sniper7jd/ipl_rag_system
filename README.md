@@ -67,3 +67,13 @@ params:
    ```bash
    python main.py
    ```
+
+## Web app (lightweight chat UI)
+
+Run a minimal Streamlit chat UI with a configurable context window:
+
+```bash
+streamlit run web_app.py
+```
+
+Use the sidebar to adjust `top_k` (context window) and optionally show the retrieved context.

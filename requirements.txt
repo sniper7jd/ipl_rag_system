@@ -8,6 +8,8 @@ langchain-text-splitters>=0.3.0
 # Vector Database & Embeddings
 chromadb>=0.5.0
 sentence-transformers>=3.0.0
+pinecone>=5.0.0
+faiss-cpu>=1.8.0
 
 # Retrieval (BM25, Ensemble for hybrid)
 rank_bm25>=0.2.2
@@ -17,3 +19,15 @@ langchain-classic>=1.0.0
 python-dotenv>=1.0.1
 wikipedia>=1.4.0
 PyYAML>=6.0
+streamlit>=1.36.0
+docx2txt>=0.9
+pymupdf>=1.24.0
+beautifulsoup4>=4.12.0
+
+# LLM integrations
+langchain-google-genai>=2.0.0
+langchain-anthropic>=0.2.0
+langchain-groq>=0.1.0
+
+# Embeddings integrations
+langchain-cohere>=0.5.0

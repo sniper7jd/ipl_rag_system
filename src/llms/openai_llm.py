@@ -10,9 +10,13 @@ Question: {question}
 Expert Answer:"""
 
 
+def get_chat_model(model="gpt-4o", temperature=0, **kwargs):
+    return ChatOpenAI(model=model, temperature=temperature, **kwargs)
+
+
 def get_chain(retriever, model="gpt-4o", temperature=0, **kwargs):
     prompt = ChatPromptTemplate.from_template(TEMPLATE)
-    llm = ChatOpenAI(model=model, temperature=temperature)
+    llm = get_chat_model(model=model, temperature=temperature, **kwargs)
     chain = (
         {"context": retriever, "question": RunnablePassthrough()}
         | prompt

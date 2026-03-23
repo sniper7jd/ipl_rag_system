@@ -6,6 +6,13 @@ PROVIDERS = {
     "huggingface": huggingface_embeddings,
 }
 
+try:
+    from .cohere_eff import get_embeddings as cohere_embeddings
+    PROVIDERS["cohere"] = cohere_embeddings
+except ImportError:
+    pass
+
+
 
 def get_embeddings(provider: str):
     if provider not in PROVIDERS:
