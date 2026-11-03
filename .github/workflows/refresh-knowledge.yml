@@ -1,0 +1,76 @@
+name: Refresh knowledge snapshot
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"   # Mondays 06:17 UTC
+  workflow_dispatch:
+    inputs:
+      season:
+        description: Latest IPL season to include
+        default: "2026"
+      force:
+        description: Rebuild even if Wikipedia content is unchanged
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-knowledge
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      FASTEMBED_CACHE_PATH: ${{ github.workspace }}/.fastembed_cache
+      EMBEDDING_BATCH_SIZE: "32"   # runners have 16 GB; the app itself keeps the low-memory default of 8
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10
+        with:
+          python-version: "3.11"
+          activate-environment: true
+
+      - name: Install dependencies
+        run: uv pip install -r requirements.txt pytest
+
+      - name: Cache ONNX models
+        uses: actions/cache@v6
+        with:
+          path: .fastembed_cache
+          key: fastembed-${{ hashFiles('src/embeddings/huggingface_eff.py', 'src/retrieval/rerank.py') }}
+
+      - name: Rebuild snapshot from Wikipedia
+        run: |
+          python scripts/build_knowledge.py --season "${{ inputs.season || '2026' }}" \
+            ${{ inputs.force && '--force' || '' }}
+
+      - name: Detect changes
+        id: diff
+        run: |
+          if git diff --quiet -- knowledge/; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Snapshot unchanged." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Quality gate (tests + retrieval evaluation)
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          pytest -q
+          python scripts/eval_retrieval.py --check
+
+      - name: Commit refreshed snapshot
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git add knowledge/ eval/results_retrieval.json
+          git commit -m "Refresh knowledge snapshot ($(python -c "import json;print(json.load(open('knowledge/manifest.json'))['content_hash'])"))"
+          git push
+          echo "Committed a refreshed snapshot; Streamlit Community Cloud redeploys on push." >> "$GITHUB_STEP_SUMMARY"

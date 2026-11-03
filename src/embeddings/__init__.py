@@ -1,17 +1,21 @@
-from .openai_eff import get_embeddings as openai_embeddings
-from .huggingface_eff import get_embeddings as huggingface_embeddings
+from .huggingface_eff import get_embeddings as fastembed_embeddings
 
 PROVIDERS = {
-    "openai": openai_embeddings,
-    "huggingface": huggingface_embeddings,
+    "huggingface": fastembed_embeddings,
+    "fastembed": fastembed_embeddings,
 }
+
+try:
+    from .openai_eff import get_embeddings as openai_embeddings
+    PROVIDERS["openai"] = openai_embeddings
+except ImportError:
+    pass
 
 try:
     from .cohere_eff import get_embeddings as cohere_embeddings
     PROVIDERS["cohere"] = cohere_embeddings
 except ImportError:
     pass
-
 
 
 def get_embeddings(provider: str):
