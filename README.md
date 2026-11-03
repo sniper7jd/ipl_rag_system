@@ -133,6 +133,7 @@ retrievers, Chroma/Pinecone). Those packages are being sunset upstream, so the a
 ## Known limitations
 
 - The knowledge base is Wikipedia only: ball-by-ball stats and very recent news may be missing or lag by up to a week.
-- The cross-encoder runs on CPU (~0.8 s per search on the free Streamlit tier); answers typically take 3-7 s.
+- The cross-encoder runs on CPU: ~0.8 s per search on a laptop, ~2.3 s on a shared 4-core CI runner, so hosted answers
+  typically take 4-10 s. Lower `fetch_k` in `config.yaml` to trade a little recall for speed.
 - Questions spanning distant eras in one sentence (e.g. "who won in 2026 and who captained the 2008 winners?") sometimes
   get a partial answer; asking them separately works better.
