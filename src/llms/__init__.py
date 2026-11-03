@@ -1,37 +1,52 @@
-from .openai_llm import generate as openai_generate, get_chain as openai_get_chain, get_chat_model as openai_get_chat_model
+"""LLM provider registry. Providers whose integration package is missing are skipped."""
+import importlib
 
-PROVIDERS = {"openai": openai_get_chain}
-CHAT_MODEL_PROVIDERS = {"openai": openai_get_chat_model}
+_MODULES = {
+    "gemini": "src.llms.gemini_llm",
+    "openai": "src.llms.openai_llm",
+    "groq": "src.llms.groq_llm",
+    "claude": "src.llms.claude_llm",
+}
 
-try:
-    from .gemini_llm import get_chain as gemini_get_chain, get_chat_model as gemini_get_chat_model
-    PROVIDERS["gemini"] = gemini_get_chain
-    CHAT_MODEL_PROVIDERS["gemini"] = gemini_get_chat_model
-except ImportError:
-    pass
+PROVIDER_MODULES = {}
+for _name, _path in _MODULES.items():
+    try:
+        PROVIDER_MODULES[_name] = importlib.import_module(_path)
+    except ImportError:
+        pass
 
-try:
-    from .claude_llm import get_chain as claude_get_chain, get_chat_model as claude_get_chat_model
-    PROVIDERS["claude"] = claude_get_chain
-    CHAT_MODEL_PROVIDERS["claude"] = claude_get_chat_model
-except ImportError:
-    pass
+PROVIDERS = {name: mod.get_chain for name, mod in PROVIDER_MODULES.items()}
+CHAT_MODEL_PROVIDERS = {name: mod.get_chat_model for name, mod in PROVIDER_MODULES.items()}
 
-try:
-    from .groq_llm import get_chain as groq_get_chain, get_chat_model as groq_get_chat_model
-    PROVIDERS["groq"] = groq_get_chain
-    CHAT_MODEL_PROVIDERS["groq"] = groq_get_chat_model
-except ImportError:
-    pass
+
+def _module(provider: str):
+    if provider not in PROVIDER_MODULES:
+        raise ValueError(f"Unknown LLM provider: {provider}. Options: {list(PROVIDER_MODULES)}")
+    return PROVIDER_MODULES[provider]
+
+
+def key_env(provider: str) -> str:
+    return _module(provider).KEY_ENV
+
+
+def default_model(provider: str) -> str:
+    return _module(provider).default_model()
+
+
+def fallback_models(provider: str) -> list:
+    """Ordered fallback model names (comma-separated in the *_FALLBACK_MODEL setting)."""
+    return [m.strip() for m in _module(provider).fallback_model().split(",") if m.strip()]
 
 
 def get_chat_model(provider: str, **kwargs):
-    if provider not in CHAT_MODEL_PROVIDERS:
-        raise ValueError(f"Unknown LLM provider: {provider}. Options: {list(CHAT_MODEL_PROVIDERS.keys())}")
-    return CHAT_MODEL_PROVIDERS[provider](**kwargs)
+    return _module(provider).get_chat_model(**kwargs)
+
+
+def get_fast_model(provider: str, api_key=None):
+    """Small, low-latency model for auxiliary calls (query rewriting, judging)."""
+    mod = _module(provider)
+    return mod.get_chat_model(model=mod.fast_model(), api_key=api_key, max_output_tokens=256)
 
 
 def get_llm_chain(provider: str, retriever, **kwargs):
-    if provider not in PROVIDERS:
-        raise ValueError(f"Unknown LLM provider: {provider}. Options: {list(PROVIDERS.keys())}")
-    return PROVIDERS[provider](retriever=retriever, **kwargs)
+    return _module(provider).get_chain(retriever=retriever, **kwargs)

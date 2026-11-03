@@ -1,0 +1,189 @@
+# Golden questions for retrieval and answer evaluation.
+# A retrieved chunk "hits" when it contains ANY string in `answers` (case-insensitive)
+# and ALL strings in `all_of`. `reference` is the expected answer used by the LLM judge.
+
+- id: champion_2026
+  category: season
+  question: Who won IPL 2026?
+  answers: ["Champions: Royal Challengers Bengaluru", "Royal Challengers Bengaluru won", "defeated Gujarat Titans"]
+  reference: Royal Challengers Bengaluru, beating Gujarat Titans by 5 wickets in the final.
+
+- id: runner_up_2026
+  category: season
+  question: Who were the runners-up of the 2026 IPL?
+  answers: ["Runners-up: Gujarat Titans", "Final: Lost to Royal Challengers Bengaluru", "defeated Gujarat Titans by 5 wickets in the final"]
+  reference: Gujarat Titans.
+
+- id: top_scorer_2026
+  category: season
+  question: Who scored the most runs in IPL 2026?
+  answers: ["Sooryavanshi (Rajasthan Royals) (776)", "Most runs: Vaibhav Sooryavanshi", "scored the most runs (776)"]
+  reference: Vaibhav Sooryavanshi of Rajasthan Royals, with 776 runs.
+
+- id: top_wickets_2026
+  category: season
+  question: Who took the most wickets in the 2026 IPL?
+  answers: ["Most wickets: Kagiso Rabada", "took the most wickets (29)"]
+  reference: Kagiso Rabada of Gujarat Titans, with 29 wickets.
+
+- id: mvp_2026
+  category: season
+  question: Who was the most valuable player of IPL 2026?
+  answers: ["Most valuable player: Vaibhav Sooryavanshi", "named the most valuable player"]
+  reference: Vaibhav Sooryavanshi.
+
+- id: matches_2026
+  category: season
+  question: How many matches were played in the 2026 Indian Premier League?
+  answers: ["74 matches", "Matches: 74"]
+  reference: 74 matches.
+
+- id: dates_2026
+  category: season
+  question: When did the 2026 IPL season start and end?
+  answers: ["28 March – 31 May", "28 March to 31 May"]
+  reference: It ran from 28 March to 31 May 2026.
+
+- id: last_place_2026
+  category: season
+  question: Which team finished last in IPL 2026?
+  answers: ["League stage: 10th place", "finished the season last (tenth)", "tenth place"]
+  all_of: ["Lucknow Super Giants"]
+  reference: Lucknow Super Giants finished 10th (last).
+
+- id: csk_captain_2026
+  category: team_season
+  question: Who captained CSK in 2026?
+  answers: ["Captain: Ruturaj Gaikwad", "captained by Ruturaj Gaikwad"]
+  reference: Ruturaj Gaikwad.
+
+- id: rcb_coach_2026
+  category: team_season
+  question: Who coached Royal Challengers Bengaluru in the 2026 season?
+  answers: ["Coach: Andy Flower", "coached by Andy Flower"]
+  reference: Andy Flower.
+
+- id: mi_finish_2026
+  category: team_season
+  question: Where did Mumbai Indians finish in the 2026 standings?
+  answers: ["League stage: 9th place", "ninth place", "finished ninth"]
+  all_of: ["Mumbai Indians"]
+  reference: 9th place.
+
+- id: dc_top_scorer_2026
+  category: team_season
+  question: Who was Delhi Capitals' top run-scorer in 2026?
+  answers: ["Most runs: KL Rahul"]
+  reference: KL Rahul, with 593 runs.
+
+- id: rr_top_wickets_2026
+  category: team_season
+  question: Who took the most wickets for RR in the 2026 season?
+  answers: ["Most wickets: Jofra Archer"]
+  reference: Jofra Archer, with 25 wickets.
+
+- id: srh_captain_2026
+  category: team_season
+  question: Who was the captain of Sunrisers Hyderabad in IPL 2026?
+  answers: ["Captain: Pat Cummins", "captained by Pat Cummins"]
+  reference: Pat Cummins.
+
+- id: lsg_top_scorer_2026
+  category: team_season
+  question: Who scored the most runs for LSG in 2026?
+  answers: ["Most runs: Mitchell Marsh"]
+  reference: Mitchell Marsh, with 563 runs.
+
+- id: pbks_captain_2026
+  category: team_season
+  question: Who led Punjab Kings in 2026?
+  answers: ["Captain: Shreyas Iyer", "captained by Shreyas Iyer"]
+  reference: Shreyas Iyer.
+
+- id: kkr_coach_2026
+  category: team_season
+  question: Who was the head coach of Kolkata Knight Riders for the 2026 season?
+  answers: ["Coach: Abhishek Nayar", "coached by Abhishek Nayar", "Abhishek Nayar replaced"]
+  reference: Abhishek Nayar.
+
+- id: gt_top_scorer_this_season
+  category: alias_and_relative_season
+  question: Who was GT's top run scorer this season?
+  answers: ["Most runs: Shubman Gill", "Runs: 732 | Player: Shubman Gill", "Shubman Gill (732)"]
+  reference: Shubman Gill, with 732 runs.
+
+- id: rcb_q1_score_2026
+  category: match
+  question: What did RCB score in Qualifier 1 of IPL 2026?
+  answers: ["254/5"]
+  reference: 254/5 in 20 overs, beating Gujarat Titans by 92 runs.
+
+- id: final_potm_2026
+  category: match
+  question: Who was player of the match in the 2026 IPL final?
+  answers: ["Player of the match: Virat Kohli"]
+  all_of: ["Final"]
+  reference: Virat Kohli (75* off 42 balls).
+
+- id: samson_trade
+  category: transfers
+  question: Who did Chennai Super Kings trade away to get Sanju Samson?
+  answers: ["traded Ravindra Jadeja and Sam Curran"]
+  reference: Ravindra Jadeja and Sam Curran went to Rajasthan Royals in exchange for Sanju Samson.
+
+- id: auction_venue_2026
+  category: transfers
+  question: Where was the auction for the 2026 IPL held?
+  answers: ["Abu Dhabi"]
+  all_of: ["auction"]
+  reference: Abu Dhabi, on 16 December 2025.
+
+- id: dhoni_salary_2026
+  category: squad
+  question: How much was MS Dhoni paid by CSK for the 2026 season?
+  answers: ["Name: MS Dhoni"]
+  all_of: ["4 crore"]
+  reference: ₹4 crore.
+
+- id: csk_titles
+  category: history
+  question: How many IPL titles have Chennai Super Kings won?
+  answers: ["IPL wins: 5", "each won five titles"]
+  reference: Five (2010, 2011, 2018, 2021, 2023).
+
+- id: first_champion
+  category: history
+  question: Which team won the first IPL season in 2008?
+  answers: ["Rajasthan Royals"]
+  all_of: ["2008", "won"]
+  reference: Rajasthan Royals.
+
+- id: gt_title_year
+  category: history
+  question: In which year did Gujarat Titans win the IPL?
+  answers: ["Indian Premier League wins: 1 (2022)", "debut season of 2022", "won the title in their debut season"]
+  reference: 2022, in their debut season.
+
+- id: mi_owner
+  category: franchise
+  question: Who owns Mumbai Indians?
+  answers: ["Owner: Reliance Industries"]
+  reference: Reliance Industries.
+
+- id: gt_home_ground
+  category: franchise
+  question: What is Gujarat Titans' home ground?
+  answers: ["Home ground: Narendra Modi Stadium"]
+  reference: Narendra Modi Stadium, Ahmedabad.
+
+- id: csk_current_coach
+  category: current
+  question: Who is the current head coach of Chennai Super Kings?
+  answers: ["Coach: Zaheer Khan", "Zaheer Khan was appointed as his successor", "Name: Zaheer Khan | Tenure: 2027"]
+  reference: Zaheer Khan, who succeeded Stephen Fleming after the 2026 season.
+
+- id: lsg_current_captain
+  category: current
+  question: Who is Lucknow Super Giants' current captain?
+  answers: ["Captain: Aiden Markram"]
+  reference: Aiden Markram.

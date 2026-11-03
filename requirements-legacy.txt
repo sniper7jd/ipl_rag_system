@@ -1,0 +1,7 @@
+# Optional: legacy config-driven strategies (semantic chunking, LangChain BM25/Ensemble
+# retrievers, Chroma/Pinecone vector stores). Not needed by the web app.
+-r requirements.txt
+langchain-community>=0.4
+langchain-classic>=1.0
+langchain-experimental>=0.4
+chromadb>=0.5

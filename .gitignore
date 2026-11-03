@@ -1,11 +1,13 @@
-# Environment
+# Environment / secrets
 .env
+.streamlit/secrets.toml
 
 # Python
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
+.pytest_cache/
 
 # Virtualenv
 venv/
@@ -19,3 +21,7 @@ chroma_db/
 
 # Uploaded documents
 data/
+
+# Model caches
+.fastembed_cache/
+fastembed_cache/

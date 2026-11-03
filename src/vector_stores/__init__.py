@@ -1,23 +1,14 @@
-from .chroma_db import initialize as chroma_initialize
+"""Legacy LangChain vector stores for custom config-driven pipelines.
 
-STORES = {
-    "chroma": chroma_initialize,
-}
+The app itself uses src.knowledge.KnowledgeBase (FAISS + BM25). These need the optional
+langchain-community package (and chromadb / pinecone for those stores)."""
+import importlib
 
-try:
-    from .faiss_db import initialize as faiss_initialize
-    STORES["faiss"] = faiss_initialize
-except ImportError:
-    pass
-
-try:
-    from .pinecone_db import initialize as pinecone_initialize
-    STORES["pinecone"] = pinecone_initialize
-except ImportError:
-    pass
+_MODULES = {"chroma": "src.vector_stores.chroma_db", "faiss": "src.vector_stores.faiss_db",
+            "pinecone": "src.vector_stores.pinecone_db"}
 
 
 def get_vector_store(store_name: str, chunks, embeddings, **kwargs):
-    if store_name not in STORES:
-        raise ValueError(f"Unknown vector store: {store_name}. Options: {list(STORES.keys())}")
-    return STORES[store_name](chunks=chunks, embeddings=embeddings, **kwargs)
+    if store_name not in _MODULES:
+        raise ValueError(f"Unknown vector store: {store_name}. Options: {list(_MODULES)}")
+    return importlib.import_module(_MODULES[store_name]).initialize(chunks=chunks, embeddings=embeddings, **kwargs)

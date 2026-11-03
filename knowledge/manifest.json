@@ -1,0 +1,126 @@
+{
+  "built_at": "2026-11-03T00:25:38Z",
+  "content_hash": "de74ae0af7acb18a",
+  "latest_season": 2026,
+  "embedding_model": "BAAI/bge-small-en-v1.5",
+  "chunking": "structured",
+  "num_pages": 23,
+  "num_chunks": 1003,
+  "pages": [
+    {
+      "title": "2026 Chennai Super Kings season",
+      "url": "https://en.wikipedia.org/wiki/2026_Chennai_Super_Kings_season",
+      "revision_timestamp": "2026-10-12T22:22:17Z"
+    },
+    {
+      "title": "2026 Delhi Capitals season",
+      "url": "https://en.wikipedia.org/wiki/2026_Delhi_Capitals_season",
+      "revision_timestamp": "2026-10-12T22:22:30Z"
+    },
+    {
+      "title": "2026 Gujarat Titans season",
+      "url": "https://en.wikipedia.org/wiki/2026_Gujarat_Titans_season",
+      "revision_timestamp": "2026-10-12T22:22:54Z"
+    },
+    {
+      "title": "2026 Indian Premier League",
+      "url": "https://en.wikipedia.org/wiki/2026_Indian_Premier_League",
+      "revision_timestamp": "2026-10-27T16:19:37Z"
+    },
+    {
+      "title": "2026 Kolkata Knight Riders season",
+      "url": "https://en.wikipedia.org/wiki/2026_Kolkata_Knight_Riders_season",
+      "revision_timestamp": "2026-10-12T22:23:06Z"
+    },
+    {
+      "title": "2026 Lucknow Super Giants season",
+      "url": "https://en.wikipedia.org/wiki/2026_Lucknow_Super_Giants_season",
+      "revision_timestamp": "2026-10-12T22:23:19Z"
+    },
+    {
+      "title": "2026 Mumbai Indians season",
+      "url": "https://en.wikipedia.org/wiki/2026_Mumbai_Indians_season",
+      "revision_timestamp": "2026-10-12T22:23:32Z"
+    },
+    {
+      "title": "2026 Punjab Kings season",
+      "url": "https://en.wikipedia.org/wiki/2026_Punjab_Kings_season",
+      "revision_timestamp": "2026-10-12T22:23:56Z"
+    },
+    {
+      "title": "2026 Rajasthan Royals season",
+      "url": "https://en.wikipedia.org/wiki/2026_Rajasthan_Royals_season",
+      "revision_timestamp": "2026-10-12T22:24:09Z"
+    },
+    {
+      "title": "2026 Royal Challengers Bengaluru season",
+      "url": "https://en.wikipedia.org/wiki/2026_Royal_Challengers_Bengaluru_season",
+      "revision_timestamp": "2026-10-12T22:24:21Z"
+    },
+    {
+      "title": "2026 Sunrisers Hyderabad season",
+      "url": "https://en.wikipedia.org/wiki/2026_Sunrisers_Hyderabad_season",
+      "revision_timestamp": "2026-10-12T22:24:34Z"
+    },
+    {
+      "title": "Chennai Super Kings",
+      "url": "https://en.wikipedia.org/wiki/Chennai_Super_Kings",
+      "revision_timestamp": "2026-10-27T16:53:10Z"
+    },
+    {
+      "title": "Delhi Capitals",
+      "url": "https://en.wikipedia.org/wiki/Delhi_Capitals",
+      "revision_timestamp": "2026-11-02T04:02:22Z"
+    },
+    {
+      "title": "Gujarat Titans",
+      "url": "https://en.wikipedia.org/wiki/Gujarat_Titans",
+      "revision_timestamp": "2026-10-04T20:31:13Z"
+    },
+    {
+      "title": "Indian Premier League",
+      "url": "https://en.wikipedia.org/wiki/Indian_Premier_League",
+      "revision_timestamp": "2026-10-29T08:23:59Z"
+    },
+    {
+      "title": "Kolkata Knight Riders",
+      "url": "https://en.wikipedia.org/wiki/Kolkata_Knight_Riders",
+      "revision_timestamp": "2026-11-02T05:05:34Z"
+    },
+    {
+      "title": "List of Indian Premier League seasons and results",
+      "url": "https://en.wikipedia.org/wiki/List_of_Indian_Premier_League_seasons_and_results",
+      "revision_timestamp": "2026-09-19T08:31:33Z"
+    },
+    {
+      "title": "Lucknow Super Giants",
+      "url": "https://en.wikipedia.org/wiki/Lucknow_Super_Giants",
+      "revision_timestamp": "2026-10-08T15:08:47Z"
+    },
+    {
+      "title": "Mumbai Indians",
+      "url": "https://en.wikipedia.org/wiki/Mumbai_Indians",
+      "revision_timestamp": "2026-10-31T05:12:47Z"
+    },
+    {
+      "title": "Punjab Kings",
+      "url": "https://en.wikipedia.org/wiki/Punjab_Kings",
+      "revision_timestamp": "2026-10-13T17:35:35Z"
+    },
+    {
+      "title": "Rajasthan Royals",
+      "url": "https://en.wikipedia.org/wiki/Rajasthan_Royals",
+      "revision_timestamp": "2026-10-12T08:57:52Z"
+    },
+    {
+      "title": "Royal Challengers Bengaluru",
+      "url": "https://en.wikipedia.org/wiki/Royal_Challengers_Bengaluru",
+      "revision_timestamp": "2026-10-27T02:53:07Z"
+    },
+    {
+      "title": "Sunrisers Hyderabad",
+      "url": "https://en.wikipedia.org/wiki/Sunrisers_Hyderabad",
+      "revision_timestamp": "2026-10-31T04:22:42Z"
+    }
+  ]
+}

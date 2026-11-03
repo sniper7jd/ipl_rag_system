@@ -1,12 +1,17 @@
 pipeline:
-  chunking: semantic
-  embeddings: huggingface
-  vector_store: faiss
-  retrieval: semantic
-  llm: gemini
+  chunking: structured     # structured | recursive | paragraph | parent_child | semantic
+  embeddings: huggingface  # FastEmbed BAAI/bge-small-en-v1.5 (local ONNX) | openai | cohere
+  vector_store: faiss      # exact inner-product FAISS index + BM25 over the same chunks
+  retrieval: hybrid        # hybrid (dense + BM25 with RRF) | dense | bm25
+  llm: gemini              # gemini | openai | groq | claude
 params:
-  chunk_size: 1000
-  chunk_overlap: 100
-  top_k: 5
+  top_k: 6
+  fetch_k: 30
+  rrf_k: 60
   use_reranker: true
+  use_filters: true
   use_agentic: true
+  max_searches: 3
+  context_token_budget: 3000
+  chunk_tokens: 400
+  chunk_overlap_tokens: 50

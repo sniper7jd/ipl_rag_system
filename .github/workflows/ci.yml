@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      FASTEMBED_CACHE_PATH: ${{ github.workspace }}/.fastembed_cache
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/setup-uv@v10.3.3
+        with:
+          python-version: "3.11"
+          activate-environment: true
+
+      - name: Install dependencies
+        run: uv pip install -r requirements.txt pytest
+
+      - name: Cache ONNX models
+        uses: actions/cache@v6
+        with:
+          path: .fastembed_cache
+          key: fastembed-${{ hashFiles('src/embeddings/huggingface_eff.py', 'src/retrieval/rerank.py') }}
+
+      - name: Unit tests
+        run: pytest -q
+
+      - name: Retrieval evaluation (fails on regression vs eval/baseline.json)
+        run: python scripts/eval_retrieval.py --check
+
+      - name: Publish results
+        if: always()
+        run: |
+          {
+            echo "## Retrieval evaluation"
+            python - <<'EOF'
+          import json
+          r = json.load(open("eval/results_retrieval.json"))
+          print(f"{r['num_questions']} golden questions, snapshot `{r['snapshot']}`\n")
+          print("| Method | Hit@1 | Hit@5 | MRR@10 | Avg latency |\n|---|---|---|---|---|")
+          for row in r["results"]:
+              print(f"| {row['method']} | {row['hit@1']:.0%} | {row['hit@5']:.0%} | {row['mrr@10']:.3f} | {row['avg_ms']} ms |")
+          EOF
+          } >> "$GITHUB_STEP_SUMMARY"
