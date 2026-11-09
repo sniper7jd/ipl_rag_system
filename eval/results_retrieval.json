@@ -1,6 +1,6 @@
 {
-  "snapshot": "de74ae0af7acb18a",
-  "built_at": "2026-11-03T00:25:38Z",
+  "snapshot": "3d107600ca2ad7f9",
+  "built_at": "2026-11-09T16:32:17Z",
   "num_questions": 30,
   "dropped_for_drift": [],
   "k": 5,
@@ -9,36 +9,36 @@
       "method": "Dense only (bge-small + FAISS)",
       "hit@1": 0.4,
       "hit@5": 0.7,
-      "mrr@10": 0.532,
+      "mrr@10": 0.543,
       "avg_ms": 3
     },
     {
       "method": "BM25 only",
       "hit@1": 0.3,
       "hit@5": 0.6,
-      "mrr@10": 0.433,
+      "mrr@10": 0.43,
       "avg_ms": 0
     },
     {
       "method": "Hybrid (RRF)",
       "hit@1": 0.433,
       "hit@5": 0.7,
-      "mrr@10": 0.548,
-      "avg_ms": 3
+      "mrr@10": 0.547,
+      "avg_ms": 4
     },
     {
       "method": "Hybrid + rerank",
       "hit@1": 0.567,
       "hit@5": 0.833,
       "mrr@10": 0.683,
-      "avg_ms": 789
+      "avg_ms": 843
     },
     {
       "method": "Hybrid + rerank + query understanding",
       "hit@1": 0.633,
       "hit@5": 0.967,
       "mrr@10": 0.778,
-      "avg_ms": 826
+      "avg_ms": 862
     }
   ],
   "full_pipeline_misses": [
@@ -57,7 +57,7 @@
       "csk_captain_2026": 5,
       "rcb_coach_2026": 2,
       "mi_finish_2026": 2,
-      "dc_top_scorer_2026": null,
+      "dc_top_scorer_2026": 10,
       "rr_top_wickets_2026": null,
       "srh_captain_2026": 1,
       "lsg_top_scorer_2026": null,
@@ -71,8 +71,8 @@
       "dhoni_salary_2026": 4,
       "csk_titles": 1,
       "first_champion": 1,
-      "gt_title_year": 4,
-      "mi_owner": null,
+      "gt_title_year": 3,
+      "mi_owner": 8,
       "gt_home_ground": 7,
       "csk_current_coach": 3,
       "lsg_current_captain": 6
@@ -100,7 +100,7 @@
       "final_potm_2026": 2,
       "samson_trade": 4,
       "auction_venue_2026": 1,
-      "dhoni_salary_2026": 10,
+      "dhoni_salary_2026": null,
       "csk_titles": 1,
       "first_champion": 1,
       "gt_title_year": null,
@@ -110,10 +110,10 @@
       "lsg_current_captain": 6
     },
     "Hybrid (RRF)": {
-      "champion_2026": 4,
+      "champion_2026": 5,
       "runner_up_2026": 2,
       "top_scorer_2026": 4,
-      "top_wickets_2026": 7,
+      "top_wickets_2026": 6,
       "mvp_2026": 1,
       "matches_2026": 1,
       "dates_2026": 2,
@@ -138,7 +138,7 @@
       "gt_title_year": 10,
       "mi_owner": null,
       "gt_home_ground": 3,
-      "csk_current_coach": 10,
+      "csk_current_coach": 8,
       "lsg_current_captain": 4
     },
     "Hybrid + rerank": {
