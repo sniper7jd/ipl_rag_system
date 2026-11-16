@@ -1,6 +1,6 @@
 {
-  "snapshot": "3d107600ca2ad7f9",
-  "built_at": "2026-11-09T16:32:17Z",
+  "snapshot": "bb3356bec8582f6e",
+  "built_at": "2026-11-16T16:00:40Z",
   "num_questions": 30,
   "dropped_for_drift": [],
   "k": 5,
@@ -10,35 +10,35 @@
       "hit@1": 0.4,
       "hit@5": 0.7,
       "mrr@10": 0.543,
-      "avg_ms": 3
+      "avg_ms": 6
     },
     {
       "method": "BM25 only",
       "hit@1": 0.3,
       "hit@5": 0.6,
       "mrr@10": 0.43,
-      "avg_ms": 0
+      "avg_ms": 1
     },
     {
       "method": "Hybrid (RRF)",
       "hit@1": 0.433,
       "hit@5": 0.7,
       "mrr@10": 0.547,
-      "avg_ms": 4
+      "avg_ms": 9
     },
     {
       "method": "Hybrid + rerank",
       "hit@1": 0.567,
       "hit@5": 0.833,
-      "mrr@10": 0.683,
-      "avg_ms": 843
+      "mrr@10": 0.682,
+      "avg_ms": 1974
     },
     {
       "method": "Hybrid + rerank + query understanding",
       "hit@1": 0.633,
       "hit@5": 0.967,
-      "mrr@10": 0.778,
-      "avg_ms": 862
+      "mrr@10": 0.776,
+      "avg_ms": 2098
     }
   ],
   "full_pipeline_misses": [
@@ -168,7 +168,7 @@
       "csk_titles": 1,
       "first_champion": 1,
       "gt_title_year": 1,
-      "mi_owner": 4,
+      "mi_owner": 5,
       "gt_home_ground": 3,
       "csk_current_coach": 2,
       "lsg_current_captain": 2
@@ -200,7 +200,7 @@
       "csk_titles": 1,
       "first_champion": 1,
       "gt_title_year": 1,
-      "mi_owner": 4,
+      "mi_owner": 5,
       "gt_home_ground": 3,
       "csk_current_coach": 2,
       "lsg_current_captain": 2
